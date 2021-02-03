@@ -17,11 +17,15 @@
   "license": "MIT",
   "dependencies": {
     "@hapi/hapi": "^20.1.0",
-    "@hapi/inert": "^6.0.3"
+    "@hapi/inert": "^6.0.3",
+    "@hapi/vision": "^6.0.1",
+    "pug": "^3.0.0"
   },
   "devDependencies": {
     "@types/hapi__hapi": "^20.0.5",
     "@types/hapi__inert": "^5.2.2",
+    "@types/hapi__vision": "^5.5.2",
+    "@types/pug": "^2.0.4",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
     "@typescript-eslint/parser": "^4.14.2",
     "dotenv": "^8.2.0",
