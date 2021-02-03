@@ -16,10 +16,12 @@
   "author": "Gus Ramírez <gram.io.dev@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@hapi/hapi": "^20.1.0"
+    "@hapi/hapi": "^20.1.0",
+    "@hapi/inert": "^6.0.3"
   },
   "devDependencies": {
     "@types/hapi__hapi": "^20.0.5",
+    "@types/hapi__inert": "^5.2.2",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
     "@typescript-eslint/parser": "^4.14.2",
     "dotenv": "^8.2.0",
