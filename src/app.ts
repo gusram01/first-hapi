@@ -9,7 +9,7 @@ const init = async () => {
   server.route({
     method: 'GET',
     path: '/',
-    handler: (req, h) => 'Hello World!',
+    handler: (req, h) => h.response('Hello World').code(200),
   });
 
   await server.start();
