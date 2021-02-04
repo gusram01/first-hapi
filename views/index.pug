@@ -1,6 +1,29 @@
 extends ./layout/layout
 
-block content 
-  h1 Hello from Views
-  each item in hello
-    span= item
+block content
+  main.container-fluid(role="main")
+    .jumbotron.bg-white
+      .container
+        h1.display-3 Pregunta y Responde
+        p
+          | El mejor lugar para aprender y ayudar a quienes están aprendiendo, crea preguntas para resolver
+          | tus dudas y comparte tu conocimiento respondiendo si conoces del tema
+
+    .container
+      h2.mb-4 Últimas preguntas
+      .card.bg-white.mb-3
+        .card-body
+          .row
+            .col-2.text-center
+              a.text-dark(href="#")
+                h3 2
+                | Respuestas
+            .col-10.d-flex.align-items-stretch
+              h4.mt-3
+                a.text-dark(href="#") Pregunta de ejemplo
+      hr
+
+block footer
+  include ./partials/footer
+block scripts
+  include ./partials/scripts

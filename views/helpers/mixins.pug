@@ -1,0 +1,10 @@
+mixin formGroup(field, type)
+  .form-group
+    label(for=field)= field
+    input.form-control(
+      required
+      type=type
+      name=field
+      id=field
+      pattern!=attributes.pattern
+    )

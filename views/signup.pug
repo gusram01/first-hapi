@@ -1,0 +1,26 @@
+extends ./layout/layout
+
+block content
+  .container.mt-4
+    .card.mb-3
+      .card-header
+        h3 Signup here
+    
+      .card-body
+        .row
+          .col
+            form(
+              method="POST"
+              action="/new-user"
+            )
+              +formGroup('name', 'text')(pattern='.{3,}')
+              +formGroup('email', 'email')(pattern=emailPattern)
+              +formGroup('password', 'password')(pattern='.{6,}')
+
+              .text-center.mt-5
+                button.btn.btn-primary.btn-block(type="submit") Send
+
+block footer
+  include ./partials/footer
+block scripts
+  include ./partials/scripts

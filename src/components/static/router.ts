@@ -2,7 +2,7 @@ import { ServerRoute } from '@hapi/hapi';
 
 export const staticRoute: ServerRoute = {
   method: 'GET',
-  path: '/{param*}',
+  path: '/assets/{param*}',
   handler: {
     directory: {
       path: '.',
