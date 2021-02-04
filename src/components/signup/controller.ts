@@ -1,6 +1,16 @@
 import { ServerRoute } from '@hapi/hapi';
 
-export const controller: ServerRoute['handler'] = (req, h) =>
+const signup: ServerRoute['handler'] = (req, h) =>
   h.view('signup', {
     title: 'Signup',
   });
+
+const newUser: ServerRoute['handler'] = (req, h) =>
+  h.view('new-user', {
+    title: 'Welcome',
+  });
+
+export const controller = {
+  signup,
+  newUser,
+};

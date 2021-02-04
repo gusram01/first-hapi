@@ -1,8 +1,8 @@
 {
-  "name": "trivia",
+  "name": "questions",
   "version": "0.1.0",
   "description": "platzi project learning hapijs",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "dev": "tsnd -r dotenv/config src/server",
     "build": "tsc",
@@ -14,11 +14,16 @@
     "learning"
   ],
   "author": "Gus Ramírez <gram.io.dev@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gusram01/first-hapi.git"
+  },
   "license": "MIT",
   "dependencies": {
     "@hapi/hapi": "^20.1.0",
     "@hapi/inert": "^6.0.3",
     "@hapi/vision": "^6.0.1",
+    "joi": "^17.3.0",
     "pug": "^3.0.0"
   },
   "devDependencies": {
