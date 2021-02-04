@@ -1,0 +1,6 @@
+{
+  "wtf": "needs sdk config file from firebase",
+  "from": "firebase.google.com",
+  "where": "inside a project",
+  "section": "config/service accounts"
+}

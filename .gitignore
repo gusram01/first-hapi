@@ -1,4 +1,6 @@
 node_modules/
 dist/
 .env
+/config/connection.json
+/config/connection.ts
 package-lock.json

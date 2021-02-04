@@ -22,6 +22,8 @@ module.exports = {
     'implicit-arrow-linebreak': 'off',
     'no-return-assign': 'off',
     'import/no-extraneous-dependencies': 'off',
+    'lines-between-class-members': 'off',
+    'no-return-await': 'off',
     'import/extensions': [
       1,
       {
