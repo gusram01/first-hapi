@@ -1,18 +1,19 @@
 import { ServerRoute } from '@hapi/hapi';
 import { usersDB } from '../../store';
 
-const signup: ServerRoute['handler'] = (req, h) =>
-  h.view('signup', {
-    title: 'Signup',
+const login: ServerRoute['handler'] = (req, h) =>
+  h.view('login', {
+    title: 'Login',
     user: req.state.user,
   });
 
-const newUser: ServerRoute['handler'] = async (req, h) => {
+const logged: ServerRoute['handler'] = async (req, h) => {
   try {
-    const data = await usersDB.newUser(req.payload as any);
-    if (!data.key) {
-      return h.response('error data').code(400);
+    const data = await usersDB.canLogin(req.payload as any);
+    if (!data) {
+      return h.response('Incorrect email/password').code(400);
     }
+
     return h.redirect('/').state('user', data);
   } catch (e) {
     console.error(e);
@@ -21,6 +22,6 @@ const newUser: ServerRoute['handler'] = async (req, h) => {
 };
 
 export const controller = {
-  signup,
-  newUser,
+  login,
+  logged,
 };

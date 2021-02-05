@@ -19,6 +19,12 @@ const init = async () => {
   await server.register(inert);
   await server.register(vision);
 
+  server.state('user', {
+    ttl: 1000 * 60 * 20,
+    isSecure: process.env.NODE_ENV === 'production',
+    encoding: 'base64json',
+  });
+
   server.views({
     engines: { pug },
     relativeTo: path.join(__dirname, '..'),

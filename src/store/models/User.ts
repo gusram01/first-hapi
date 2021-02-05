@@ -1,6 +1,7 @@
 import { database } from 'firebase-admin';
-import { encrypt } from '../../helpers/encrypter';
+import { encrypt, correctPass } from '../../helpers/encrypter';
 import { Users } from '../interfaces/Users';
+import { Login } from '../interfaces/Login';
 
 export class User {
   private db: database.Database;
@@ -19,6 +20,22 @@ export class User {
 
     await refUser.set({ ...data, password: await encrypt(password) });
 
-    return refUser.key;
+    return { key: refUser.key, ...data };
+  }
+
+  async canLogin(user: Login) {
+    const userQuery = await this.collection
+      .orderByChild('email')
+      .equalTo(user.email)
+      .once('value');
+
+    const userFound = userQuery.val();
+    if (!userFound) {
+      return false;
+    }
+
+    const [, info] = Object.entries<Users>(userFound)[0];
+    const { password, ...data } = info;
+    return (await correctPass(user.password, info.password)) && data;
   }
 }
