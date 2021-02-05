@@ -6,9 +6,9 @@ nav.navbar.navbar-expand-sm.navbar-dark.bg-dark.row.align-items-center
     .col.m-2.text-right
       if user
         .row.justify-content-end
-          h4: span.badge.badge-info Welcome #{user.name}
+          h4: span.badge.badge-info It's good to see you #{user.name}
         .row.justify-content-end
-          +navLink('/', 'Ask')
+          +navLink('/ask', 'Ask')
           +navLink('/logout', 'Logout')
       else 
         +navLink('/login', 'Login')

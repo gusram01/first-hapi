@@ -1,0 +1,32 @@
+extends ./layout/layout
+
+block content
+  .container.mt-4
+    .card.mb-3
+      .card-header
+        h3 Create New Question
+      .card-body
+        .row
+          .col
+            if error 
+                .alert.alert-danger(role="alert")= error
+            form(
+              method="POST" 
+              action="/ask" 
+            )
+              +formGroup('title', 'text')(pattern='.{3,}')
+              .form-group
+                label(for="description") Description
+                textarea.form-control#description(
+                  name="description"
+                  placeholder="Explain your issue"
+                  pattern='.{10,}'
+                  required
+                )
+              .text-center.mt-5
+                button.btn.btn-primary.btn-block(type="submit") Send Question
+
+block footer
+  include ./partials/footer
+block scripts
+  include ./partials/scripts
