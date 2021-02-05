@@ -1,6 +1,6 @@
 import { ServerRoute } from '@hapi/hapi';
 
-export const staticRoute: ServerRoute = {
+const staticRoute: ServerRoute = {
   method: 'GET',
   path: '/assets/{param*}',
   handler: {
@@ -10,3 +10,5 @@ export const staticRoute: ServerRoute = {
     },
   },
 };
+
+export { staticRoute };

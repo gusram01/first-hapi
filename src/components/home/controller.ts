@@ -1,7 +1,9 @@
-import { server, ServerRoute } from '@hapi/hapi';
+import { ServerRoute } from '@hapi/hapi';
 
-export const controller: ServerRoute['handler'] = (req, h) =>
+const home: ServerRoute['handler'] = (req, h) =>
   h.view('index', {
     title: 'Home',
     user: req.state.user,
   });
+
+export const controller = { home };

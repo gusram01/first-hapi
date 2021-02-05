@@ -7,11 +7,14 @@ block content
         h3 Signup here
     
       .card-body
-        .row
+      
+        .row 
           .col
+            if error 
+              .alert.alert-danger(role="alert")= error
             form(
               method="POST"
-              action="/new-user"
+              action="/signup"
             )
               +formGroup('name', 'text')(pattern='.{3,}')
               +formGroup('email', 'email')(pattern=emailPattern)

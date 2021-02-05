@@ -4,5 +4,5 @@ import { controller } from './controller';
 export const homeRoute: ServerRoute = {
   method: 'GET',
   path: '/',
-  handler: controller,
+  handler: controller.home,
 };

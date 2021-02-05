@@ -2,6 +2,7 @@ import Joi from 'joi';
 import { ServerRoute } from '@hapi/hapi';
 import { controller } from './controller';
 import { emailPattern } from '../../helpers/emailPattern';
+import { failJoiValidation } from '../../helpers/failValidation';
 
 const signupRoute: ServerRoute = {
   method: 'GET',
@@ -10,7 +11,7 @@ const signupRoute: ServerRoute = {
 };
 const newUserRoute: ServerRoute = {
   method: 'POST',
-  path: '/new-user',
+  path: '/signup',
   handler: controller.newUser,
   options: {
     validate: {
@@ -19,6 +20,7 @@ const newUserRoute: ServerRoute = {
         email: Joi.string().required().pattern(emailPattern),
         password: Joi.string().required().min(6),
       }),
+      failAction: failJoiValidation,
     },
   },
 };

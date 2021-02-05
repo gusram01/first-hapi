@@ -1,22 +1,36 @@
 import { ServerRoute } from '@hapi/hapi';
 import { usersDB } from '../../store';
+import { Users } from '../../store/interfaces/Users';
 
-const signup: ServerRoute['handler'] = (req, h) =>
-  h.view('signup', {
+const signup: ServerRoute['handler'] = (req, h) => {
+  if (req.state.user) {
+    return h.redirect('/');
+  }
+  return h.view('signup', {
     title: 'Signup',
     user: req.state.user,
   });
-
+};
 const newUser: ServerRoute['handler'] = async (req, h) => {
   try {
-    const data = await usersDB.newUser(req.payload as any);
+    const data = await usersDB.newUser(req.payload as Users);
     if (!data.key) {
-      return h.response('error data').code(400);
+      return h
+        .view('signup', {
+          title: 'Signup',
+          error: 'Something get wrong, please try again',
+        })
+        .code(400);
     }
     return h.redirect('/').state('user', data);
   } catch (e) {
     console.error(e);
-    return h.response('Oopss try again later').code(500);
+    return h
+      .view('signup', {
+        title: 'Signup',
+        error: 'Something get wrong, please try again',
+      })
+      .code(500);
   }
 };
 

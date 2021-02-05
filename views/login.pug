@@ -9,6 +9,8 @@ block content
       .card-body
         .row
           .col
+            if error 
+              .alert.alert-danger(role="alert")= error
             form(
               method="POST"
               action="/login"
