@@ -11,17 +11,27 @@ block content
 
     .container
       h2.mb-4 Last Questions
-      .card.bg-white.mb-3
-        .card-body
-          .row
-            .col-2.text-center
-              a.text-dark(href="#")
-                h3 2
-                | Answers
-            .col-10.d-flex.align-items-stretch
-              h4.mt-3
-                a.text-dark(href="#") This is an example
-      hr
+      if questions 
+        each q, key in questions
+          .card.bg-white.mb-3
+            .card-body
+              .row
+                .col-2.text-center
+                  a.text-dark(href="#")
+                    h3 2
+                    | Answers
+                .col-10.d-flex.align-items-stretch
+                  h4.mt-3
+                    a.text-dark(href="#")= q.title
+          hr
+      else 
+        .card.bg-white.mb-3
+          .card-body
+            .row
+              .col-2.text-center
+                h3 
+              .col-10.d-flex.align-items-stretch
+                h4.mt-3= error
 
 block footer
   include ./partials/footer

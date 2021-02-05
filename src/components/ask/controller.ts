@@ -16,11 +16,12 @@ const newAsk: ServerRoute['handler'] = async (req, h) => {
     owner: req.state.user,
     title,
     description,
+    created: new Date().getTime(),
   };
 
   try {
     const data = await questionsDB.newQuestion(question);
-    if (!data) {
+    if (!data.key) {
       return h
         .view('ask', {
           title: 'FAQ - new Question',

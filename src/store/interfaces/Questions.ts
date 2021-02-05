@@ -4,5 +4,6 @@ export interface Questions {
   owner: Users;
   title: string;
   description: string;
-  [key: string]: string | Users;
+  created: number;
+  [key: string]: string | Users | number;
 }
