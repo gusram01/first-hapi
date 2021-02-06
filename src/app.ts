@@ -5,6 +5,7 @@ import vision from '@hapi/vision';
 import pug from 'pug';
 import router from './routes';
 import { fileNotFound } from './helpers/assetNotFound';
+import { getQuestions } from './methods/getQuestions';
 
 const port = process.env.PORT || 3000;
 const host = process.env.HOST || 'localhost';
@@ -19,6 +20,13 @@ const init = async () => {
 
   await server.register(inert);
   await server.register(vision);
+
+  server.method('getQuestions', getQuestions, {
+    cache: {
+      expiresIn: 60 * 1000,
+      generateTimeout: 2000,
+    },
+  });
 
   /** Define cookie "user" */
   server.state('user', {

@@ -20,7 +20,7 @@ export class Question {
     return { key: refQuestion.key, ...question };
   }
 
-  async getQuestions(howMany = 5) {
+  async getQuestions(howMany: number) {
     const query = await this.collection
       .limitToLast(howMany)
       .orderByChild('created')

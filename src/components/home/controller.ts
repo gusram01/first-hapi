@@ -1,9 +1,8 @@
 import { ServerRoute } from '@hapi/hapi';
-import { questionsDB } from '../../store';
 
 const home: ServerRoute['handler'] = async (req, h) => {
   try {
-    const questions = await questionsDB.getQuestions(10);
+    const questions = await req.server.methods.getQuestions(10);
     if (!questions) {
       return h.view('index', {
         title: 'Home',
