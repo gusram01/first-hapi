@@ -17,8 +17,13 @@ block content
             .card-body
               .row
                 .col-2.text-center
-                  a.text-dark(href="#")
-                    h3 2
+                  a.text-dark(href="/question/")
+                    -
+                      let numAns = 0;
+                      if(q.answers){
+                       numAns = Object.keys(q.answers).length
+                      }
+                    h3=numAns
                     | Answers
                 .col-10.d-flex.align-items-stretch
                   h4.mt-3

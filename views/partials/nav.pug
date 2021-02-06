@@ -8,8 +8,8 @@ nav.navbar.navbar-expand-sm.navbar-dark.bg-dark.row.align-items-center
         .row.justify-content-end
           h4: span.badge.badge-info It's good to see you #{user.name}
         .row.justify-content-end
-          +navLink('/ask', 'Ask')
-          +navLink('/logout', 'Logout')
+          +navLink('/ask', 'Ask')(class='btn-outline-primary')
+          +navLink('/logout', 'Logout')(class='btn-outline-light')
       else 
-        +navLink('/login', 'Login')
-        +navLink('/signup', 'Signup')
+        +navLink('/login', 'Login')(class='btn-outline-primary')
+        +navLink('/signup', 'Signup')(class='btn-outline-light')

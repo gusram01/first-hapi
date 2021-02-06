@@ -5,5 +5,6 @@ export interface Answers {
   answer: string;
   id: string;
   created: number;
-  [key: string]: string | Users | number;
+  correct: boolean;
+  [key: string]: boolean | string | Users | number;
 }

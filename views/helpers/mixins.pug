@@ -9,7 +9,8 @@ mixin formGroup(field, type)
       pattern!=attributes.pattern
     )
 mixin navLink(href, text)
-  a.btn.btn-outline-light.mr-2.ml-2(
+  a.btn.mr-2.ml-2(
+    class!=attributes.class
     href=href
     role="button" 
     aria-pressed="true"

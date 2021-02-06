@@ -42,4 +42,20 @@ export class Question {
 
     return { key: refAnswer.key, ...answer };
   }
+
+  async setCorrectAnswer(questionId: string, answerId: string) {
+    const query = await this.getQuestion(questionId);
+    const { answers } = query;
+
+    Object.keys(answers).forEach((key) => {
+      answers[key].correct = key === answerId;
+    });
+
+    const data = await this.collection
+      .child(questionId)
+      .child('answers')
+      .update(answers);
+
+    return data;
+  }
 }

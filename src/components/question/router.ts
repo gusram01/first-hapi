@@ -8,6 +8,12 @@ const questionRoute: ServerRoute = {
   path: '/question/{id}',
   handler: controller.question,
 };
+const correctAnswerRoute: ServerRoute = {
+  method: 'GET',
+  path: '/correct/{questionId}/{answerId}',
+  handler: controller.correctAnswer,
+};
+
 const answerRoute: ServerRoute = {
   method: 'POST',
   path: '/answer',
@@ -23,4 +29,4 @@ const answerRoute: ServerRoute = {
   },
 };
 
-export { questionRoute, answerRoute };
+export { questionRoute, answerRoute, correctAnswerRoute };

@@ -11,10 +11,11 @@ const newAnswer: ServerRoute['handler'] = async (req, h) => {
   const auxAnswer = {
     user: req.state.user,
     created: new Date().getTime(),
+    correct: false,
     answer,
     id,
   };
-  console.log(auxAnswer);
+
   try {
     const data = await questionsDB.newAnswer(auxAnswer);
     if (!data) {
@@ -31,11 +32,26 @@ const newAnswer: ServerRoute['handler'] = async (req, h) => {
     console.error(e);
   }
 };
-const question: ServerRoute['handler'] = async (req, h) => {
-  const { id } = req.params as any;
+const correctAnswer: ServerRoute['handler'] = async (req, h) => {
+  const { questionId, answerId } = req.params as any;
   if (!req.state.user) {
     return h.redirect('/login');
   }
+  try {
+    await questionsDB.setCorrectAnswer(questionId, answerId);
+    return h.redirect(`/question/${questionId}`);
+  } catch (e) {
+    console.error(e);
+    // return h
+    //   .view('question', {
+    //     title: 'FAQ - new Question',
+    //     error: 'Something get wrong, please try again',
+    //   })
+    //   .code(500);
+  }
+};
+const question: ServerRoute['handler'] = async (req, h) => {
+  const { id } = req.params as any;
   try {
     const data = await questionsDB.getQuestion(id);
     if (!data) {
@@ -62,4 +78,5 @@ const question: ServerRoute['handler'] = async (req, h) => {
 export const controller = {
   question,
   newAnswer,
+  correctAnswer,
 };

@@ -9,8 +9,11 @@ block content
       p.mb-0: small Created by 
         strong=question.owner.name
     if question.answers
-      each ans in question.answers
-        .alert.alert-secondary(role="alert")
+      each ans, aKey in question.answers
+        .alert(
+          class= ans.correct ? 'alert-success':'alert-secondary' 
+          role="alert"
+        )
           p=ans.answer
           hr
           .container
@@ -18,39 +21,39 @@ block content
               .col-sm: small Created by 
                 strong=ans.user.name
               .col-sm.text-right
-
-    //- .alert.alert-success(role="alert")
-    //-   p Answer mark as correct
-    //-   hr
-    //-   .container
-    //-     .row
-    //-       .col-sm Creada por
-    //-         strong Adrian Estrada
-          
-    //-       .col-sm.text-right
-    //-         h3: span.badge.badge-success Respuesta correcta
-
+                -
+                  let flag = false;
+                  if(user){
+                    flag = question.owner.email === user.email
+                  }
+                if flag && !ans.correct
+                  a.btn.btn-success.btn-sm(href="/correct/"+key+"/"+aKey) Correct Answer
+                else if ans.correct
+                  h3: span.badge.badge-success This is the right one!! 😎 
     .card.mb-3
-      .card-header
-        h3 Responder
-      .card-body
-        .row
-          .col
-            form(
-              method="POST"
-              action="/answer"
-            )
-              .form-group
-                label(for="answer") Answer
-                textarea.form-control#answer(
-                  name="answer"
-                  required
-                )
-                input(type="hidden" name="id" value=key)
-              
-              .text-center.mt-5
-                button.btn.btn-outline-primary.btn-block(type="submit") Send answer
-              
+      if user
+        .card-header
+          h3 Responder
+        .card-body
+          .row
+            .col
+              form(
+                method="POST"
+                action="/answer"
+              )
+                .form-group
+                  label(for="answer") Answer
+                  textarea.form-control#answer(
+                    name="answer"
+                    required
+                  )
+                  input(type="hidden" name="id" value=key)
+                
+                .text-center.mt-5
+                  button.btn.btn-outline-primary.btn-block(type="submit") Send answer
+      else 
+        a.btn.btn-outline-primary(href="/login") Login to answer this question!
+
 block footer
   include ./partials/footer
 block scripts
