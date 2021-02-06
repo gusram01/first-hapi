@@ -1,5 +1,6 @@
 import { database } from 'firebase-admin';
 import { Questions } from '../interfaces/Questions';
+import { Answers } from '../interfaces/Answers';
 
 export class Question {
   private db: database.Database;
@@ -19,11 +20,26 @@ export class Question {
     return { key: refQuestion.key, ...question };
   }
 
-  async getQuestions(howMany: number) {
+  async getQuestions(howMany = 5) {
     const query = await this.collection
       .limitToLast(howMany)
       .orderByChild('created')
       .once('value');
     return query.val();
+  }
+
+  async getQuestion(id: string) {
+    const query = await this.collection.child(id).once('value');
+    return query.val();
+  }
+
+  async newAnswer(answer: Answers) {
+    const refAnswer = await this.collection
+      .child(answer.id)
+      .child('answers')
+      .push();
+    await refAnswer.set(answer);
+
+    return { key: refAnswer.key, ...answer };
   }
 }

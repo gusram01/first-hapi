@@ -1,0 +1,57 @@
+extends ./layout/layout
+
+block content
+  .container.mt-4
+    .alert.alert-primary(role="alert")
+      h4.alert-heading=question.title
+      p=question.description
+      hr
+      p.mb-0: small Created by 
+        strong=question.owner.name
+    if question.answers
+      each ans in question.answers
+        .alert.alert-secondary(role="alert")
+          p=ans.answer
+          hr
+          .container
+            .row
+              .col-sm: small Created by 
+                strong=ans.user.name
+              .col-sm.text-right
+
+    //- .alert.alert-success(role="alert")
+    //-   p Answer mark as correct
+    //-   hr
+    //-   .container
+    //-     .row
+    //-       .col-sm Creada por
+    //-         strong Adrian Estrada
+          
+    //-       .col-sm.text-right
+    //-         h3: span.badge.badge-success Respuesta correcta
+
+    .card.mb-3
+      .card-header
+        h3 Responder
+      .card-body
+        .row
+          .col
+            form(
+              method="POST"
+              action="/answer"
+            )
+              .form-group
+                label(for="answer") Answer
+                textarea.form-control#answer(
+                  name="answer"
+                  required
+                )
+                input(type="hidden" name="id" value=key)
+              
+              .text-center.mt-5
+                button.btn.btn-outline-primary.btn-block(type="submit") Send answer
+              
+block footer
+  include ./partials/footer
+block scripts
+  include ./partials/scripts

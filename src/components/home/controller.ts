@@ -11,6 +11,7 @@ const home: ServerRoute['handler'] = async (req, h) => {
         error: 'There is not questions at this moment',
       });
     }
+    console.log(questions);
     return h.view('index', {
       title: 'Home',
       user: req.state.user,

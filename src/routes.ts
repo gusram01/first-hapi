@@ -6,6 +6,7 @@ import { loggedRoute, loginRoute } from './components/login/router';
 import { logoutRoute } from './components/logout/router';
 import { error404Route } from './components/404/router';
 import { askRoute, newQuestion } from './components/ask/router';
+import { answerRoute, questionRoute } from './components/question/router';
 
 const routes: ServerRoute[] = [
   homeRoute,
@@ -18,6 +19,8 @@ const routes: ServerRoute[] = [
   error404Route,
   askRoute,
   newQuestion,
+  questionRoute,
+  answerRoute,
 ];
 
 export default routes;
