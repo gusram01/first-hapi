@@ -17,8 +17,16 @@ const newQuestion: ServerRoute = {
       payload: Joi.object({
         title: Joi.string().required().min(3),
         description: Joi.string().required().min(10),
+        image: Joi.optional(),
       }),
       failAction: failJoiValidation,
+    },
+    payload: {
+      output: 'stream',
+      parse: true,
+      multipart: {
+        output: 'stream',
+      },
     },
   },
 };

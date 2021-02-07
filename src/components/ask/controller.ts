@@ -11,16 +11,19 @@ const ask: ServerRoute['handler'] = (req, h) => {
   });
 };
 const newAsk: ServerRoute['handler'] = async (req, h) => {
-  const { title, description } = req.payload as any;
+  const { title, description, image } = req.payload as any;
+
   const question = {
     owner: req.state.user,
     title,
     description,
     created: new Date().getTime(),
+    // eslint-disable-next-line no-underscore-dangle
+    image,
   };
 
   try {
-    const data = await questionsDB.newQuestion(question);
+    const data = await questionsDB.newQuestion(question, image.hapi.filename);
     if (!data.key) {
       return h
         .view('ask', {

@@ -5,6 +5,11 @@ block content
     .alert.alert-primary(role="alert")
       h4.alert-heading=question.title
       p=question.description
+      if question.imageUrl 
+        img(
+          src="https://storage.googleapis.com/hapi-platzi-gus.appspot.com/"+question.imageUrl 
+          width="300"
+        )
       hr
       p.mb-0: small Created by 
         strong=question.owner.name
@@ -33,7 +38,7 @@ block content
     .card.mb-3
       if user
         .card-header
-          h3 Responder
+          h3 Answer this question
         .card-body
           .row
             .col

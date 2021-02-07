@@ -12,7 +12,8 @@ block content
                 .alert.alert-danger(role="alert")= error
             form(
               method="POST" 
-              action="/ask" 
+              action="/ask"
+              enctype="multipart/form-data"
             )
               +formGroup('title', 'text')(pattern='.{3,}')
               .form-group
@@ -22,6 +23,12 @@ block content
                   placeholder="Explain your issue"
                   pattern='.{10,}'
                   required
+                )
+              .form-group
+                label(for="image") Image
+                input.form-control#image(
+                  type="file"
+                  name="image"
                 )
               .text-center.mt-5
                 button.btn.btn-primary.btn-block(type="submit") Send Question

@@ -7,5 +7,7 @@ export interface Questions {
   title: string;
   description: string;
   created: number;
+  image?: any;
+  imageUrl?: string;
   [key: string]: string | Users | number | Answers[] | undefined;
 }

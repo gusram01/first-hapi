@@ -1,6 +1,7 @@
 import { database } from 'firebase-admin';
 import { Questions } from '../interfaces/Questions';
 import { Answers } from '../interfaces/Answers';
+import { imageStorage } from '..';
 
 export class Question {
   private db: database.Database;
@@ -13,11 +14,26 @@ export class Question {
     this.collection = this.ref.child('faq');
   }
 
-  async newQuestion(question: Questions) {
+  async newQuestion(question: Questions, imagePath: string) {
     const refQuestion = this.collection.push();
-    await refQuestion.set(question);
+    const { image, ...dataDB } = question;
+    let storedImage: string;
+    let finalData: any;
 
-    return { key: refQuestion.key, ...question };
+    if (image.hapi.filename) {
+      // eslint-disable-next-line no-underscore-dangle
+      storedImage = await imageStorage.newImage(image._data, imagePath);
+      finalData = {
+        imageUrl: storedImage,
+        ...dataDB,
+      };
+    } else {
+      finalData = dataDB;
+    }
+
+    await refQuestion.set(finalData);
+
+    return { key: refQuestion.key, ...finalData };
   }
 
   async getQuestions(howMany: number) {
