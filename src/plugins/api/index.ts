@@ -1,11 +1,20 @@
 import Joi from 'joi';
 import { Plugin } from '@hapi/hapi';
+import Basic from '@hapi/basic';
 import { controller } from './controller';
 import { failValidation } from './failValidation';
+import { validate } from '../../helpers/validateAuth';
 
 const apiPlugin: Plugin<any> = {
   async register(server, options) {
     const base = options.prefix || 'api';
+
+    await server.register(Basic);
+
+    /** Server Basic Authentication */
+    server.auth.strategy('simple', 'basic', { validate });
+    server.auth.default('simple');
+
     server.route({
       method: 'GET',
       path: `/${base}/question/{id}`,

@@ -20,6 +20,7 @@ const routes: hapi.RouteOptions = {
 const init = async () => {
   const server = hapi.server({ port, host, routes });
 
+  /** Plugins */
   await server.register(inert);
   await server.register(vision);
   await server.register({
@@ -35,6 +36,7 @@ const init = async () => {
     },
   });
 
+  /** Server Methods */
   server.method('getQuestions', getQuestions, {
     cache: {
       expiresIn: 60 * 1000,
