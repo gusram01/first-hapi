@@ -14,6 +14,8 @@ const logged: ServerRoute['handler'] = async (req, h) => {
   try {
     const data = await usersDB.canLogin(req.payload as any);
     if (!data) {
+      req.logger.error('Please write valie email/password');
+
       return h
         .view('login', {
           title: 'Login',
@@ -24,7 +26,8 @@ const logged: ServerRoute['handler'] = async (req, h) => {
 
     return h.redirect('/').state('user', data);
   } catch (e) {
-    console.error(e);
+    req.logger.error(e, 'Error message');
+
     return h
       .view('login', {
         title: 'Login',

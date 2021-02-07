@@ -25,6 +25,7 @@ const newAsk: ServerRoute['handler'] = async (req, h) => {
   try {
     const data = await questionsDB.newQuestion(question, image.hapi.filename);
     if (!data.key) {
+      req.logger.error('Please write valit title/description');
       return h
         .view('ask', {
           title: 'FAQ - new Question',
@@ -35,7 +36,8 @@ const newAsk: ServerRoute['handler'] = async (req, h) => {
 
     return h.redirect('/');
   } catch (e) {
-    console.error(e);
+    req.logger.error(e, 'Error message');
+
     return h
       .view('ask', {
         title: 'FAQ - new Question',

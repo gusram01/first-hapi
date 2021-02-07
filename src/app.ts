@@ -3,6 +3,7 @@ import path from 'path';
 import inert from '@hapi/inert';
 import vision from '@hapi/vision';
 import pug from 'pug';
+import pino from 'hapi-pino';
 import router from './routes';
 import { fileNotFound } from './helpers/assetNotFound';
 import { getQuestions } from './methods/getQuestions';
@@ -20,6 +21,12 @@ const init = async () => {
 
   await server.register(inert);
   await server.register(vision);
+  await server.register({
+    plugin: pino,
+    options: {
+      prettyPrint: process.env.NODE_ENV !== 'production',
+    },
+  });
 
   server.method('getQuestions', getQuestions, {
     cache: {
@@ -48,7 +55,7 @@ const init = async () => {
   server.route(router);
 
   await server.start();
-  console.log(`Server online on port: ${server.info.port}`);
+  server.logger.info(`Server online on port: ${server.info.port}`);
 };
 
 export { init };

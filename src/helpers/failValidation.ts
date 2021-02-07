@@ -6,6 +6,9 @@ export const failJoiValidation: RouteOptionsValidate['failAction'] = (
   err,
 ) => {
   const view = req.path.split('/')[1];
+  if (err) {
+    req.logger.error(err, 'Error from failJoiValidation');
+  }
   return h
     .view(view, {
       title: 'Validation Error',

@@ -19,19 +19,15 @@ const newAnswer: ServerRoute['handler'] = async (req, h) => {
   try {
     const data = await questionsDB.newAnswer(auxAnswer);
     if (!data) {
-      // return h
-      //   .view('question', {
-      //     title: 'FAQ - new Question',
-      //     error: 'Please write valid title / description',
-      //   })
-      //   .code(400);
+      req.logger.error('Error on posting new Question, please try again');
     }
 
     return h.redirect(`/question/${id}`);
   } catch (e) {
-    console.error(e);
+    req.logger.error(e, 'Error message');
   }
 };
+
 const correctAnswer: ServerRoute['handler'] = async (req, h) => {
   const { questionId, answerId } = req.params as any;
   if (!req.state.user) {
@@ -41,15 +37,10 @@ const correctAnswer: ServerRoute['handler'] = async (req, h) => {
     await questionsDB.setCorrectAnswer(questionId, answerId);
     return h.redirect(`/question/${questionId}`);
   } catch (e) {
-    console.error(e);
-    // return h
-    //   .view('question', {
-    //     title: 'FAQ - new Question',
-    //     error: 'Something get wrong, please try again',
-    //   })
-    //   .code(500);
+    req.logger.error(e, 'Error message');
   }
 };
+
 const question: ServerRoute['handler'] = async (req, h) => {
   const { id } = req.params as any;
   try {
@@ -65,13 +56,7 @@ const question: ServerRoute['handler'] = async (req, h) => {
       key: id,
     });
   } catch (e) {
-    console.error(e);
-    // return h
-    //   .view('question', {
-    //     title: 'FAQ - new Question',
-    //     error: 'Something get wrong, please try again',
-    //   })
-    //   .code(500);
+    req.logger.error(e, 'Error message');
   }
 };
 

@@ -24,7 +24,7 @@ const newUser: ServerRoute['handler'] = async (req, h) => {
     }
     return h.redirect('/').state('user', data);
   } catch (e) {
-    console.error(e);
+    req.logger.error(e, 'Error message');
     return h
       .view('signup', {
         title: 'Signup',
