@@ -7,6 +7,7 @@ import pino from 'hapi-pino';
 import router from './routes';
 import { fileNotFound } from './helpers/assetNotFound';
 import { getQuestions } from './methods/getQuestions';
+import apiPlugin from './plugins/api/index';
 
 const port = process.env.PORT || 3000;
 const host = process.env.HOST || 'localhost';
@@ -25,6 +26,12 @@ const init = async () => {
     plugin: pino,
     options: {
       prettyPrint: process.env.NODE_ENV !== 'production',
+    },
+  });
+  await server.register({
+    plugin: apiPlugin,
+    options: {
+      prefix: 'api',
     },
   });
 
