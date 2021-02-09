@@ -1,9 +1,8 @@
 import admin from 'firebase-admin';
-
-const serviceAccount = require('../../config/connection.json');
+import { config } from './config';
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.cert(config),
   databaseURL: process.env.DB_URL,
   storageBucket: process.env.STORAGE_BUCKET,
   databaseAuthVariableOverride: {

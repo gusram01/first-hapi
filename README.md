@@ -2,54 +2,65 @@
 
 ## Build basic app with Hapi
 
--With Typescript
+- With Typescript
 
--With eslint
+- With Eslint
 
--With pug
+- With Pug
 
 ## For a demo visit:
 
+[Demo Live App](https://hapi-demo-gus.herokuapp.com/)
+
 #
+
+## Environment variables
 
 ### Inital configuration
 
 It is necesary add .env file in development and save environment variables on production.
 
 An example of the info is at:
+example.env in the root of project
 
 ```txt
-example.env   //root project
+
 
 PORT=3000
 HOST='localhost'
 DB_URL=/url/to/your/db
 DB_UID=some-key-for-apply-db-rules
 
+PROJECT_ID=needs-sdk-config-file-from-firebase
+PRIVATE_KEY_ID=download-this-info-from-firebase-config
+PRIVATE_KEY=download-this-info-from-firebase-config
+CLIENT_EMAIL=download-this-info-from-firebase-config
+CLIENT_ID=download-this-info-from-firebase-config
+AUTH_URI=download-this-info-from-firebase-config
+TOKEN_URI=download-this-info-from-firebase-config
+AUTH_PROVIDER_X509_CERT_URL=download-this-info-from-firebase-config
+CLIENT_X509_CERT_URL=download-this-info-from-firebase-config
+
 ```
 
-likewise a configuration file is needed inside config folder
+That is because the config connection to firebase required the environment variables
 
-```txt
-
-config/connection.json // at root level
-
+```js
+export const config: any = {
+  type: 'service_account',
+  project_id: process.env.PROJECT_ID,
+  private_key_id: process.env.PRIVATE_KEY_ID,
+  private_key: process.env.PRIVATE_KEY,
+  client_email: process.env.CLIENT_EMAIL,
+  client_id: process.env.CLIENT_ID,
+  auth_uri: process.env.AUTH_URI,
+  token_uri: process.env.TOKEN_URI,
+  auth_provider_x509_cert_url: process.env.AUTH_PROVIDER_X509_CERT_URL,
+  client_x509_cert_url: process.env.CLIENT_X509_CERT_URL,
+};
 ```
 
-```json
-{
-  "type": "service_account",
-  "project_id": "needs sdk config file from firebase",
-  "private_key_id": "download this info from firebase config",
-  "private_key": "download this info from firebase config",
-  "client_email": "download this info from firebase config",
-  "client_id": "download this info from firebase config",
-  "auth_uri": "download this info from firebase config",
-  "token_uri": "download this info from firebase config"
-}
-```
-
-#
+## After need to install dependencies
 
 Build node_modules
 
