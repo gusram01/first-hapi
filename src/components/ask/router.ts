@@ -7,6 +7,9 @@ const askRoute: ServerRoute = {
   method: 'GET',
   path: '/ask',
   handler: controller.ask,
+  options: {
+    auth: false,
+  },
 };
 const newQuestion: ServerRoute = {
   method: 'POST',
@@ -28,6 +31,7 @@ const newQuestion: ServerRoute = {
         output: 'stream',
       },
     },
+    auth: false,
   },
 };
 

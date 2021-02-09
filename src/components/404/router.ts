@@ -5,4 +5,8 @@ export const error404Route: ServerRoute = {
   method: ['GET', 'POST'],
   path: '/{any*}',
   handler: controller.error404,
+
+  options: {
+    auth: false,
+  },
 };

@@ -7,11 +7,17 @@ const questionRoute: ServerRoute = {
   method: 'GET',
   path: '/question/{id}',
   handler: controller.question,
+  options: {
+    auth: false,
+  },
 };
 const correctAnswerRoute: ServerRoute = {
   method: 'GET',
   path: '/correct/{questionId}/{answerId}',
   handler: controller.correctAnswer,
+  options: {
+    auth: false,
+  },
 };
 
 const answerRoute: ServerRoute = {
@@ -26,6 +32,7 @@ const answerRoute: ServerRoute = {
       }),
       failAction: failJoiValidation,
     },
+    auth: false,
   },
 };
 

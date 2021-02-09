@@ -1,6 +1,10 @@
 {
-  "wtf": "needs sdk config file from firebase",
-  "from": "firebase.google.com",
-  "where": "inside a project",
-  "section": "config/service accounts"
+  "type": "service_account",
+  "project_id": "needs sdk config file from firebase",
+  "private_key_id": "download this info from firebase config",
+  "private_key": "download this info from firebase config",
+  "client_email": "download this info from firebase config",
+  "client_id": "download this info from firebase config",
+  "auth_uri": "download this info from firebase config",
+  "token_uri": "download this info from firebase config"
 }

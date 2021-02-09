@@ -22,6 +22,7 @@ const newUser: ServerRoute['handler'] = async (req, h) => {
         })
         .code(400);
     }
+
     return h.redirect('/').state('user', data);
   } catch (e) {
     req.logger.error(e, 'Error message');

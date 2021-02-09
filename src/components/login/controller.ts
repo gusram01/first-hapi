@@ -14,7 +14,7 @@ const logged: ServerRoute['handler'] = async (req, h) => {
   try {
     const data = await usersDB.canLogin(req.payload as any);
     if (!data) {
-      req.logger.error('Please write valie email/password');
+      req.logger.error('Please write valid email/password');
 
       return h
         .view('login', {

@@ -1,14 +1,14 @@
 import hapi from '@hapi/hapi';
-import path from 'path';
-import inert from '@hapi/inert';
-import vision from '@hapi/vision';
-import Crumb from '@hapi/crumb';
 import pug from 'pug';
+import path from 'path';
 import pino from 'hapi-pino';
+import inert from '@hapi/inert';
+import Crumb from '@hapi/crumb';
+import vision from '@hapi/vision';
 import router from './routes';
 import { fileNotFound } from './helpers/assetNotFound';
 import { getQuestions } from './methods/getQuestions';
-import apiPlugin from './plugins/api/index';
+import { validate } from './helpers/validateAuth';
 
 const Blankie = require('blankie');
 const Scooter = require('@hapi/scooter');
@@ -34,9 +34,10 @@ const init = async () => {
       options: {
         styleSrc:
           "'self' 'unsafe-inline' https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css",
-        fontSrc: "'self' data:",
+        fontSrc: "'self' 'unsafe-inline'",
         scriptSrc:
           "'self' 'unsafe-inline' https://code.jquery.com/jquery-3.5.1.slim.min.js https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js",
+        imgSrc: "'self' blob: https://storage.googleapis.com",
         generateNonces: false,
       },
     },
@@ -53,12 +54,7 @@ const init = async () => {
     plugin: pino,
     options: {
       prettyPrint: process.env.NODE_ENV !== 'production',
-    },
-  });
-  await server.register({
-    plugin: apiPlugin,
-    options: {
-      prefix: 'api',
+      logRequestComplete: false,
     },
   });
 
@@ -72,9 +68,12 @@ const init = async () => {
 
   /** Define cookie "user" */
   server.state('user', {
-    ttl: 1000 * 60 * 20,
+    ttl: 1000 * 60 * 60,
     isSecure: process.env.NODE_ENV === 'production',
     encoding: 'base64json',
+    isHttpOnly: true,
+    clearInvalid: true,
+    strictHeader: true,
   });
 
   /** Define pug as view engine */

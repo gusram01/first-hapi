@@ -5,6 +5,10 @@ const logoutRoute: ServerRoute = {
   method: 'GET',
   path: '/logout',
   handler: controller.logout,
+
+  options: {
+    auth: false,
+  },
 };
 
 export { logoutRoute };

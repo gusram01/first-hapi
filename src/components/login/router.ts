@@ -8,6 +8,13 @@ const loginRoute: ServerRoute = {
   method: 'GET',
   path: '/login',
   handler: controller.login,
+
+  options: {
+    auth: false,
+    state: {
+      parse: true,
+    },
+  },
 };
 const loggedRoute: ServerRoute = {
   method: 'POST',
@@ -20,6 +27,10 @@ const loggedRoute: ServerRoute = {
         password: Joi.string().required().min(6),
       }),
       failAction: failJoiValidation,
+    },
+    auth: false,
+    state: {
+      parse: true,
     },
   },
 };

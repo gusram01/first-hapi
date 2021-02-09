@@ -8,6 +8,9 @@ const signupRoute: ServerRoute = {
   method: 'GET',
   path: '/signup',
   handler: controller.signup,
+  options: {
+    auth: false,
+  },
 };
 const newUserRoute: ServerRoute = {
   method: 'POST',
@@ -22,6 +25,7 @@ const newUserRoute: ServerRoute = {
       }),
       failAction: failJoiValidation,
     },
+    auth: false,
   },
 };
 

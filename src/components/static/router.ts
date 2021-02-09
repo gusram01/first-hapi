@@ -9,6 +9,9 @@ const staticRoute: ServerRoute = {
       redirectToSlash: true,
     },
   },
+  options: {
+    auth: false,
+  },
 };
 
 export { staticRoute };

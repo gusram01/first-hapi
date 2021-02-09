@@ -10,5 +10,6 @@ export const homeRoute: ServerRoute = {
       expiresIn: 30 * 1000,
       privacy: 'private',
     },
+    auth: false,
   },
 };
