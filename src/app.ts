@@ -8,7 +8,6 @@ import vision from '@hapi/vision';
 import router from './routes';
 import { fileNotFound } from './helpers/assetNotFound';
 import { getQuestions } from './methods/getQuestions';
-import { validate } from './helpers/validateAuth';
 
 const Blankie = require('blankie');
 const Scooter = require('@hapi/scooter');
